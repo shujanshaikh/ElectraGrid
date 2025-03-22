@@ -14,7 +14,7 @@ export default function PostVehicle() {
   const [year, setYear] = useState('')
   const [batteryCapacity, setBatteryCapacity] = useState('')
 
-  const postVehicle = async () => {
+   const postVehicle = async () => {
 
     const input = {
       model,

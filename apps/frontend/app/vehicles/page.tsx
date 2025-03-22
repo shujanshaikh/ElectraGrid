@@ -21,7 +21,7 @@ export default function Vehicles() {
 
   const [vehicle , setVehicle ] = useState<Vehicle[]>([])
   
-  const fetVehicle = async() => {
+    const fetchVehicle = async() => {
     const token = localStorage.getItem("token")
     await axios.get(`${BACKEND_URL}/vehicle`, {
       headers : {
@@ -40,7 +40,7 @@ export default function Vehicles() {
   }
   
   useEffect(() => {
-    fetVehicle()
+    fetchVehicle()
 }, [])
 
   return (

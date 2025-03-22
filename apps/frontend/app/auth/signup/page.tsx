@@ -9,6 +9,7 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { BACKEND_URL } from '@/config';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function SignUp() {
 
@@ -16,6 +17,7 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState('')
+    const [showAlert, setShowAlert] = useState(false)
 
 
 
@@ -30,8 +32,13 @@ export default function SignUp() {
             console.log(res.data)
         }).catch(error => {
             console.log(error)
+            return
         })
-        router.push("/auth/signin")
+        setShowAlert(true)
+        setTimeout(() => {
+            setShowAlert(false)
+        }, 5000)
+        router.push("/dashboard")
     }
 
 
@@ -97,6 +104,14 @@ export default function SignUp() {
                         </Link>
                     </div>
                 </Card>
+                <div className='p-10 top-100'>
+               {showAlert && (
+                            <Alert className="w-80 h-15 bg-black/50 z-70 bottom-0 left-1/2 -translate-x-1/2 text-green-400 hover:text-green-300 transition-colors ">
+                                <AlertTitle className='justify-center flex items-center'>Success</AlertTitle>
+                                <AlertDescription className='justify-center flex items-center'>You have successfully signed up.</AlertDescription>
+                            </Alert>
+                        )}
+               </div>
             </div>
         </div>
     );
