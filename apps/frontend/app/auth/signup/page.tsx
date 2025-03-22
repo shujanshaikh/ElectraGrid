@@ -28,17 +28,22 @@ export default function SignUp() {
             role
         }
 
-        await axios.post(`${BACKEND_URL}/signup`, inputData).then((res) => {
+       const response = await axios.post(`${BACKEND_URL}/signup`, inputData)
+       .then((res) => {
+            if(!res.data){
+                console.log("Error")
+                return
+            }
+            setShowAlert(true)
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 5000)
+            router.push("/dashboard")
             console.log(res.data)
         }).catch(error => {
             console.log(error)
             return
         })
-        setShowAlert(true)
-        setTimeout(() => {
-            setShowAlert(false)
-        }, 5000)
-        router.push("/dashboard")
     }
 
 

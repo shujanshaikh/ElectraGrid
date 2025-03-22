@@ -25,6 +25,7 @@ import { useState } from "react";
 import axios from "axios";
 import { BACKEND_URL } from "@/config";
 import { useRouter } from "next/navigation";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 export default function AdminStations() {
     const [name, setName] = useState("");
@@ -35,6 +36,7 @@ export default function AdminStations() {
     const [price, setPrice] = useState("");
     const [powerOutput, setPowerOutput] = useState("");
     const [status, setStatus] = useState("");
+    const [showAlert, setShowAlert] = useState(false)
     const router = useRouter()
 
     const postStations = async () => {
@@ -60,7 +62,11 @@ export default function AdminStations() {
                     Authorization: `Bearer ${token}`,
                 },
             });
-
+            setShowAlert(true)
+            setTimeout(() => {
+                setShowAlert(false)
+            }, 5000)
+            router.push("/stations")
             console.log(response);
         } catch (error) {
            console.log(error)
@@ -170,6 +176,14 @@ export default function AdminStations() {
                             </form>
                         </CardContent>
                     </Card>
+                </div>
+                <div className='p-10 top-100'>
+                    {showAlert && (
+                        <Alert className="w-80 h-15 bg-black/50 z-70 bottom-0 left-1/2 -translate-x-1/2 text-green-400 hover:text-green-300 transition-colors ">
+                            <AlertTitle className='justify-center flex items-center'>Success</AlertTitle>
+                            <AlertDescription className='justify-center flex items-center'>New station added successfully.</AlertDescription>
+                        </Alert>
+                    )}
                 </div>
             </main>
         </div>

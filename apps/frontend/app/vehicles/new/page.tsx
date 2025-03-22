@@ -8,11 +8,15 @@ import { Zap, Car } from "lucide-react";
 import Link from 'next/link';
 import axios from 'axios';
 import { BACKEND_URL } from '@/config';
+import { useRouter } from 'next/navigation';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 export default function PostVehicle() {
   const [model, setModel] = useState('')
   const [year, setYear] = useState('')
   const [batteryCapacity, setBatteryCapacity] = useState('')
+  const [showAlert, setShowAlert] = useState(false)
+  const router = useRouter()
 
    const postVehicle = async () => {
 
@@ -30,6 +34,11 @@ export default function PostVehicle() {
         Authorization: `Bearer ${token}`,
       },
     })
+    setShowAlert(true)
+    setTimeout(() => {
+      setShowAlert(false)
+    }, 5000)
+    router.push("/vehicles")
     console.log(res.data)
   }
 
@@ -95,8 +104,8 @@ export default function PostVehicle() {
 
                 <div>
                   <Input
-                    type="Price"
-                    placeholder="Price"
+                    type="number"
+                    placeholder="Battery Capacity"
                     value={batteryCapacity}
                     onChange={(e) => setBatteryCapacity(e.target.value)}
                     className="bg-black/40 border-green-500/20 focus:border-green-500/50 text-white"
@@ -111,6 +120,14 @@ export default function PostVehicle() {
               </Button>
             </form>
           </Card>
+          <div className='p-10 top-100'>
+               {showAlert && (
+                            <Alert className="w-80 h-15 bg-black/50 z-70 bottom-0 left-1/2 -translate-x-1/2 text-green-400 hover:text-green-300 transition-colors ">
+                                <AlertTitle className='justify-center flex items-center'>Success</AlertTitle>
+                                <AlertDescription className='justify-center flex items-center'>New vehicle added successfully.</AlertDescription>
+                            </Alert>
+                        )}
+               </div>
         </div>
       </main>
     </div>
