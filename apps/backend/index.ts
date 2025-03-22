@@ -9,7 +9,16 @@ const port = process.env.PORT || 8080;
 
 const app = express();
 app.use(express.json());
-app.use(cors()) 
+const allowedOrigins = ["https://electra-grid.vercel.app", "http://localhost:3000"];
+
+app.use(
+  cors({
+    origin: allowedOrigins, 
+    methods: "GET,POST,PUT,DELETE,OPTIONS",
+    allowedHeaders: "Content-Type,Authorization",
+    credentials: true, 
+  })
+);
 app.use("/api/v1", router)
 app.use("/api/v1", adminRouter)
 app.use("/api/v1", chatRouter)
