@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String        @id @default(uuid())
+  email       String        @unique
+  password    String
+  role        Role          @default(USER)
+  vehicles    Vehicle[]
+  payments    Payment[]
+  messages    Message[]
+  energyUsage EnergyUsage[]
+  createdAt   DateTime      @default(now())
+}
+
+model ChargingStation {
+  id          String        @id @default(uuid())
+  name        String
+  address     String
+  city        String
+  state       String
+  zipCode     String
+  status      StationStatus @default(AVAILABLE)
+  price       Int
+  powerOutput Int
+  energyUsage EnergyUsage[] 
+  createdAt   DateTime      @default(now())
+}
+
+model Vehicle {
+  id              String   @id @default(uuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  model           String
+  year            Int
+  batteryCapacity Float
+  createdAt       DateTime @default(now())
+}
+
+model EnergyUsage {
+  id        String           @id @default(uuid())
+  userId    String
+  user      User?            @relation(fields: [userId], references: [id])
+  stationId String
+  station   ChargingStation? @relation(fields: [stationId], references: [id]) 
+  kWhUsed   Float
+  cost      Float?
+  createdAt DateTime         @default(now())
+}
+
+model Payment {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User?    @relation(fields: [userId], references: [id])
+  amount     Float
+  status     PaymentStatus @default(PENDING)
+  createdAt  DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User?    @relation(fields: [userId], references: [id])
+  content   String   
+  role      MessageRole
+  createdAt DateTime @default(now())
+}
+
+enum MessageRole {
+  USER
+  ASSISTANT
+}
+enum Role {
+  USER
+  ADMIN
+}
+
+enum StationStatus {
+  AVAILABLE
+  UNAVAILABLE
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+}
