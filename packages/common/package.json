@@ -1,5 +1,5 @@
 {
-  "name": "common",
+  "name": "@repo/common",
   "module": "index.ts",
   "type": "module",
   "private": true,
