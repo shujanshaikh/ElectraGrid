@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { SigninSchema, signupSchema } from "common"
+import { SigninSchema, signupSchema } from "@repo/common"
 import bcrypt from "bcrypt";
 import prisma from "@repo/db";
 import jwt from "jsonwebtoken";

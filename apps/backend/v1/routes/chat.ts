@@ -1,5 +1,5 @@
 import prisma from "@repo/db";
-import { MessageSchema } from "common";
+import { MessageSchema } from "@repo/common";
 import { Router } from "express";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import OpenAI from "openai";

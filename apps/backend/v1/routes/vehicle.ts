@@ -1,5 +1,5 @@
 import prisma from "@repo/db";
-import { VehicleSchema } from "common";
+import { VehicleSchema } from "@repo/common";
 import { Router } from "express";
 import { userMiddleware } from "../../middleware/usermiddleware";
 
