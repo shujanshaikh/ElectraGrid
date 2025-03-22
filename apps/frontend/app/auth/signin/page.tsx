@@ -43,7 +43,7 @@ export default function SignIn() {
           <Link href="/" className="inline-flex items-center gap-2 group">
             <Zap className="w-8 h-8 text-green-500 animate-pulse group-hover:animate-none" />
             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">
-              EV Power
+              Eletra Grid
             </span>
           </Link>
         </div>

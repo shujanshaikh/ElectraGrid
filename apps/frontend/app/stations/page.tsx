@@ -51,7 +51,7 @@ export default function Stations() {
           <Link href="/" className="flex items-center gap-2 group">
             <Zap className="w-6 h-6 text-green-500 animate-pulse group-hover:animate-none" />
             <span className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">
-              EV Power
+              Eletra Grid
             </span>
           </Link>
           <div className="flex items-center gap-4">

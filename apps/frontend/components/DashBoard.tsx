@@ -4,20 +4,23 @@ import { Button } from "./ui/button";
 import Link from 'next/link'; 
 import { BatteryCharging, MapPin, Shield, Zap, ChevronRight, Globe, Sparkles } from "lucide-react";
 import { Card } from "./ui/card";
+import { useRouter } from "next/navigation";
 
 export default function DashBoard() {
+   const router = useRouter()
+
   return (
     <div className="min-h-screen bg-black text-foreground">
        <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-md border-b border-green-500/10">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2 group">
             <Zap className="w-6 h-6 text-green-500 animate-pulse group-hover:animate-none" />
-            <span className="text-lg font-semibold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)] group-hover:drop-shadow-[0_0_25px_rgba(34,197,94,0.6)] transition-all duration-300">EV Power</span>
+            <span className="text-2xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-green-400 to-emerald-500 drop-shadow-[0_0_15px_rgba(34,197,94,0.4)] group-hover:drop-shadow-[0_0_25px_rgba(34,197,94,0.6)] transition-all duration-300">Eletra Grid</span>
           </div>
           <div className="flex items-center gap-6">
-            <Button variant="ghost" className="text-sm text-gray-400 hover:text-green-400 hover:bg-green-500/10 transition-colors">About</Button>
-            <Button variant="ghost" className="text-sm text-gray-400 hover:text-green-400 hover:bg-green-500/10 transition-colors">Network</Button>
-            <Button variant="ghost" className="text-sm text-gray-400 hover:text-green-400 hover:bg-green-500/10 transition-colors">Pricing</Button>
+            <Button onClick={() => router.push('/about')} variant="ghost" className="text-sm text-gray-400 hover:text-green-400 hover:bg-green-500/10 transition-colors" >About</Button>
+            <Button onClick={() => router.push('/vehicles')} variant="ghost" className="text-sm text-gray-400 hover:text-green-400 hover:bg-green-500/10 transition-colors">Vehicle</Button>
+            <Button onClick={() => router.push('/stations')} variant="ghost" className="text-sm text-gray-400 hover:text-green-400 hover:bg-green-500/10 transition-colors">Stations</Button>
             <Link href="/auth/signin">
               <Button className="bg-green-500/20 hover:bg-green-500/30 text-green-400 hover:text-green-300 border border-green-500/30 hover:border-green-500/50 transition-all duration-300">
                 Get Started
@@ -80,7 +83,7 @@ export default function DashBoard() {
               <span className="text-sm text-green-500">Global Network</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Why Choose EV Power
+              Why Choose Eletra Grid
             </h2>
             <p className="text-xl text-gray-400 max-w-2xl">
               Join thousands of satisfied drivers who trust our charging network for their daily commute and long-distance travel.
@@ -149,14 +152,14 @@ export default function DashBoard() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <Zap className="w-6 h-6 text-green-500" />
-              <span className="text-xl font-semibold text-white">EV Power</span>
+              <span className="text-xl font-semibold text-white">Eletra Grid</span>
             </div>
             <div className="flex gap-8 text-sm text-gray-400">
               <a href="#" className="hover:text-green-400 transition-colors">Privacy</a>
               <a href="#" className="hover:text-green-400 transition-colors">Terms</a>
               <a href="#" className="hover:text-green-400 transition-colors">Contact</a>
             </div>
-            <div className="text-sm text-gray-400">© 2025 EV Power. All rights reserved.</div>
+            <div className="text-sm text-gray-400">© 2025 Eletra Grid. All rights reserved.</div>
           </div>
         </div>
       </footer>
