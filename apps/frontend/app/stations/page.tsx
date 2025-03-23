@@ -21,19 +21,13 @@ interface Station {
 
 export default function Stations() {
   const [stations, setStations] = useState<Station[]>([]);
-  const [error, setError] = useState<string | null>(null);
 
   const fetchStations = async () => {
     try {
       const res = await axios.get(`${BACKEND_URL}/stations`);
       console.log("API Response:", res.data); 
 
-      if (Array.isArray(res.data.stations)) {
-        setStations(res.data.stations);
-      } else {
-        console.error("Expected an array but got:", res.data.stations);
-        setError("Invalid data format received from the server.");
-      }
+      setStations(res.data.stations);
     } catch (err) {
       console.log(err)
     }
@@ -55,9 +49,9 @@ export default function Stations() {
             </span>
           </Link>
           <div className="flex items-center gap-4">
-            <Link href="/chat">
-              <Button variant="ghost" className="text-gray-400 hover:text-green-400 hover:bg-green-500/10">
-                Support Chat
+            <Link href="/admin/stations">
+              <Button  variant="ghost" className="text-gray-400 hover:text-green-400 hover:bg-green-500/10">
+                Add Station
               </Button>
             </Link>
             <Button className="bg-green-500/20 hover:bg-green-500/30 text-green-400 hover:text-green-300 border border-green-500/30 hover:border-green-500/50">
@@ -79,7 +73,7 @@ export default function Stations() {
           </div>
 
           
-          {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        
 
 
          

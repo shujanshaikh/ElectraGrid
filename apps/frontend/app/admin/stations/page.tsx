@@ -46,8 +46,8 @@ export default function AdminStations() {
             city,
             state,
             zipCode,
-            price,
-            powerOutput,
+            price: price ? Number(price) : undefined,
+            powerOutput: powerOutput ? Number(powerOutput) : undefined,
             status,
         };
 
@@ -59,9 +59,14 @@ export default function AdminStations() {
             }
             const response = await axios.post(`${BACKEND_URL}/stations`, inputStations, {
                 headers: {
+                    "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,
                 },
             });
+            if (response.status !== 200) {
+                console.error("Failed to create station");
+                return;
+            }
             setShowAlert(true)
             setTimeout(() => {
                 setShowAlert(false)
@@ -69,13 +74,14 @@ export default function AdminStations() {
             router.push("/stations")
             console.log(response);
         } catch (error) {
+            console.log("Catched error")
            console.log(error)
         }
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        await postStations();
+        postStations();
     };
 
     const handleCLick = (e: React.FormEvent) => {

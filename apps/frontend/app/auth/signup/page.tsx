@@ -38,7 +38,7 @@ export default function SignUp() {
             setTimeout(() => {
                 setShowAlert(false)
             }, 5000)
-            router.push("/dashboard")
+            router.push("/auth/signin")
             console.log(res.data)
         }).catch(error => {
             console.log(error)
@@ -88,7 +88,7 @@ export default function SignUp() {
                         <div className="space-y-2">
                             <Input
                                 type="role"
-                                placeholder="Role"
+                                placeholder="ADMIN/USER"
                                 value={role}
                                 onChange={(e) => setRole(e.target.value)}
                                 className="bg-black/40 border-green-500/20 focus:border-green-500/50 text-white"
