@@ -19,11 +19,11 @@ app.use(
     credentials: true, 
   })
 );
+
 app.use("/api/v1", router)
 app.use("/api/v1", adminRouter)
 app.use("/api/v1", chatRouter)
 app.use("/api/v1", vehicleRouter)
-app.use("/api/v1", chatRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

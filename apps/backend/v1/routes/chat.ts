@@ -4,19 +4,29 @@ import { Router } from "express";
 import type { ChatCompletionMessageParam } from "openai/resources/chat/completions";
 import OpenAI from "openai";
 import { SYSTEM_PROMPT } from "../../prompts/systemPrompts";
+import { userMiddleware } from "../../middleware/usermiddleware";
 
 export const chatRouter = Router()
 
 
-chatRouter.post("/chat",  async (req, res) => {
+chatRouter.post("/chat", userMiddleware, async (req, res) => {
+  
     const openai = new OpenAI({
-        apiKey: process.env.GEMINI_API_KEY,
+        apiKey: Bun.env.GEMINI_API_KEY,
         baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/"
     });
 
     try {
         const {message} = req.body
+        if(!message) {
+            res.status(400).json({
+                message: "Invalid message input"
+            })
+            return
+        }
+        
 
+        console.log("Saving message to database with userId:", req.userId);
         await prisma.message.create({
             data: {
                 content: message,
@@ -24,7 +34,7 @@ chatRouter.post("/chat",  async (req, res) => {
                 userId: req.userId
             }
         })
-
+       
         const previousMessage = await prisma.message.findMany({
             where: {
                 userId: req.userId
@@ -42,26 +52,28 @@ chatRouter.post("/chat",  async (req, res) => {
                 role: "user", content:message
             })
         ]
-
+      
         const response = await openai.chat.completions.create({
             model: "gemini-2.0-flash",
             messages: allmessages
         });
 
         const reply = response.choices[0]?.message.content;
-
+      
         await prisma.message.create({
             data: {
                 role: "ASSISTANT",
-                content: reply || ""
+                content: reply || "",
+                userId: req.userId
             }
         })
-        console.log(reply)  
+       
         res.json({
             reply
         })
         return
     } catch (error) {
+        console.log(error)
         res.status(500).json({
             message: "Unauthorized Error"
         })

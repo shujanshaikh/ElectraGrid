@@ -152,7 +152,7 @@ export default function DashBoard() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <Zap className="w-6 h-6 text-green-500" />
-              <span className="text-xl font-semibold text-white">Eletra Grid</span>
+              <span className="text-lg font-semibold text-white">Eletra Grid</span>
             </div>
             <div className="flex gap-8 text-sm text-gray-400">
               <a href="#" className="hover:text-green-400 transition-colors">Privacy</a>
