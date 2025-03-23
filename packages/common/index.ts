@@ -40,6 +40,8 @@ export const ChargingStationSchema = z.object({
     zipCode: z.string(),
     price: z.preprocess((val) => Number(val), z.number()),
     powerOutput: z.preprocess((val) => Number(val), z.number()),
+    latitude: z.preprocess((val) => Number(val), z.number()),
+    longitude: z.preprocess((val) => Number(val), z.number()),
     status: z.enum(["AVAILABLE", "UNAVAILABLE"]),
 })
 

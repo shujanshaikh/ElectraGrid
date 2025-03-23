@@ -35,6 +35,8 @@ export default function AdminStations() {
     const [zipCode, setZipCode] = useState("");
     const [price, setPrice] = useState("");
     const [powerOutput, setPowerOutput] = useState("");
+    const [latitude, setLatitude] = useState("");
+    const [longitude, setLongitude] = useState("");
     const [status, setStatus] = useState("");
     const [showAlert, setShowAlert] = useState(false)
     const router = useRouter()
@@ -48,6 +50,8 @@ export default function AdminStations() {
             zipCode,
             price: price ? Number(price) : undefined,
             powerOutput: powerOutput ? Number(powerOutput) : undefined,
+            latitude: latitude ? Number(latitude) : undefined,
+            longitude: longitude ? Number(longitude) : undefined,
             status,
         };
 
@@ -154,6 +158,14 @@ export default function AdminStations() {
                                     <div className="flex flex-col space-y-1.5">
                                         <Label htmlFor="powerOutput">Power Output</Label>
                                         <Input id="powerOutput" placeholder="Power Output" value={powerOutput} onChange={(e) => setPowerOutput(e.target.value)} />
+                                    </div>
+                                    <div className="flex flex-col space-y-1.5">
+                                        <Label htmlFor="latitude">Latitude</Label>
+                                        <Input id="latitude" placeholder="Latitude" value={latitude} onChange={(e) => setLatitude(e.target.value)} />
+                                    </div>
+                                    <div className="flex flex-col space-y-1.5">
+                                        <Label htmlFor="longitude">Longitude</Label>
+                                        <Input id="longitude" placeholder="Longitude" value={longitude} onChange={(e) => setLongitude(e.target.value)} />
                                     </div>
                                     <div className="flex flex-col space-y-1.5 justify-center items-center">
                                         <Label htmlFor="status">STATUS</Label>

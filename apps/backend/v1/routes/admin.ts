@@ -27,6 +27,8 @@ adminRouter.post("/stations" , adminMiddleware , async (req , res) => {
             zipCode : parsedData.data.zipCode,
             price : parsedData.data.price,
             powerOutput : parsedData.data.powerOutput,
+            latitude : parsedData.data.latitude,
+            longitude : parsedData.data.longitude,
             status : parsedData.data.status,
         }
     })

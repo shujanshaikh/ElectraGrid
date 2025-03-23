@@ -29,6 +29,8 @@ model ChargingStation {
   status      StationStatus @default(AVAILABLE)
   price       Int
   powerOutput Int
+  latitude    Float?
+  longitude   Float?
   energyUsage EnergyUsage[] 
   createdAt   DateTime      @default(now())
 }
